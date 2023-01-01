@@ -1,0 +1,51 @@
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.8.0 <0.9.0;
+struct User {
+    string name;
+    uint256 age;
+}
+
+/**
+ * @title MySavings
+ * @dev Deposit savings
+ */
+contract MySavings {
+
+    // in the future the balance(uint256) can be moved insite User model(Struct)
+    mapping(address => uint256) public balance;
+    mapping(address => User) public userInfo;
+
+    constructor() {}
+
+    /**
+     * @dev Deposit the value,
+     * @param amount -> amount to store for the current sender
+     */
+    function deposit(uint256 amount) external payable {
+        balance[msg.sender] += amount;
+    }
+
+    /**
+     *@dev Get the sender balance
+     */
+    function checkBalance() external view returns (uint256) {
+        return balance[msg.sender];
+    }
+
+    /**
+     *@dev set KYC for User(caller)
+     * @param name -> name of the curent user
+     * @param age -> age of the curent user
+     */
+    function setUserDetails(string calldata name, uint256 age) external {
+        userInfo[msg.sender] = User(name, age);
+    }
+
+    /**
+     *@dev get KYC infos for User(caller)
+     */
+    function getUserDetail() external view returns (User memory) {
+        return userInfo[msg.sender];
+    }
+}
