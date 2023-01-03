@@ -83,13 +83,11 @@ contract MySavings {
      *@dev Withdraw the funds(owner)
      */
     function withdraw() external onlyOwner {}
-
-    //     Add an addFund function and create a modifier that only allows users that have deposited using the deposit function, to increase their balance on the mapping.
-    //     The function should accept the amount to be added and update the mapping to have the new balance
-    //     Hint: if their balance is zero on the mapping, it should revert
-
-    // Hint: theMapping[userId] = theMapping[userId] + _amount;
-
+    
+    /**
+     * @dev Existing users can add ne funds,
+     * @param amount -> amount to deposit for the current sender
+     */
     function addFund(uint256 _amount)
         external
         hasDeposit
